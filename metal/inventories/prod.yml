@@ -2,7 +2,7 @@ all:
   vars:
     control_plane_endpoint: 192.168.178.100
     load_balancer_ip_pool:
-      - 192.168.178.224/27
+      - 192.168.178.224/24
 metal:
   children:
     masters:
