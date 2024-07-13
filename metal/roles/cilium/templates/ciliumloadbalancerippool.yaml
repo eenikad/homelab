@@ -3,7 +3,10 @@ kind: CiliumLoadBalancerIPPool
 metadata:
   name: default
 spec:
-  cidrs:
-    {% for cidr in load_balancer_ip_pool %}
-    - cidr: {{ cidr }}
-    {% endfor %}
+  blocks:
+    - start: "192.168.178.220"
+      stop: "192.168.178.229"
+  #cidrs:
+  #  {% for cidr in load_balancer_ip_pool %}
+  #  - cidr: {{ cidr }}
+  #  {% endfor %}
