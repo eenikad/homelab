@@ -1,4 +1,4 @@
-module git.anneken.cloud/khuedoan/homelab/platform/secret-generator
+module github.com/khuedoan/homelab/platform/secret-generator
 
 go 1.19
 
