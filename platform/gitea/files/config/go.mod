@@ -1,4 +1,4 @@
-module github.com/khuedoan/homelab/gitea/config
+module git.anneken.cloud/khuedoan/homelab/gitea/config
 
 go 1.19
 
