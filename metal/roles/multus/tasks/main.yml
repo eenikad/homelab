@@ -1,0 +1,10 @@
+# Apply manifest
+- name: Apply multus Daemonset manifest to the cluster.
+  kubernetes.core.k8s:
+    state: present
+    src: multus-daemonset.yaml
+
+- name: Apply multus cni
+  kubernetes.core.k8s:
+    state: present
+    src: network-attachment-definition.yaml

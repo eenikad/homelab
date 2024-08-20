@@ -17,3 +17,5 @@ cilium_values:
       enabled: true
     ui:
       enabled: true
+  cni:
+    exclusive: false

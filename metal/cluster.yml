@@ -9,3 +9,4 @@
   hosts: localhost
   roles:
     - cilium
+    - multus
