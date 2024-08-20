@@ -1,0 +1,37 @@
+zigbee2mqtt:
+  image:
+      # -- image repository
+    repository: koenkk/zigbee2mqtt
+    # -- image tag
+    tag: 1.19.1
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - host: &host zigbee2mqtt.anneken.cloud
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: zigbee2mqtt-tls-certificate
+          hosts:
+            - *host
+  config:
+    # These will be applied ONLY on first run
+    # Home Assistant integration (MQTT discovery)
+    homeassistant: true
+
+  persistence:
+    data:
+      enabled: true
+      type: pvc
+      accessMode: ReadWriteOnce
+      size: 8Gi
+      mountPath: /data
+      readOnly: false
+      #storageClass: longhorn
+
+  

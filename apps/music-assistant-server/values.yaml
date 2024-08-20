@@ -1,0 +1,22 @@
+music-assistant-server:
+  image:
+    # -- image repository
+    repository: ghcr.io/music-assistant/server
+  env:
+    # -- Set the container timezone
+    TZ: Europe/Berlin
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: "nginx"
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - host: &host ma.anneken.cloud
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: music-assistant-server-tls-certificate
+          hosts:
+            - *host

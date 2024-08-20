@@ -1,0 +1,7 @@
+apiVersion: v2
+name: jdownloader2
+version: 0.0.0
+dependencies:
+  - name: jdownloader2
+    version: 18.3.0
+    repository: oci://tccr.io/truecharts

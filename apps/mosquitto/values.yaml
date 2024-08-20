@@ -1,0 +1,29 @@
+mosquitto:
+  image:
+    repository: eclipse-mosquitto
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - host: &host mqtt.anneken.cloud
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: mosquitto-tls-certificate
+          hosts:
+            - *host
+  # persistence:
+  #   pvc:
+  #     enabled: true
+  #     type: pvc
+  #     accessMode: ReadWriteOnce
+  #     size: 8Gi
+  #     mountPath: /config
+  #     readOnly: false
+      #storageClass: longhorn
+
+  

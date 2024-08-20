@@ -1,0 +1,7 @@
+apiVersion: v2
+name: music-assistant-server
+version: 0.0.0
+dependencies:
+  - name: music-assistant-server
+    version: 0.1.3
+    repository: https://lmatfy.github.io/charts

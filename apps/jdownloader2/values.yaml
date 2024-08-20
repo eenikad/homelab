@@ -1,0 +1,22 @@
+jdownloader2:
+  image:
+    repository: jlesage/jdownloader-2
+    tag: v24.08.1@sha256:71f25653644cfc19235a67f4264f227b22337d6fa17f5c278e49b5cea18513a8
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - host: &host jdownloader.anneken.cloud
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: jdownloader-tls-certificate
+          hosts:
+            - *host
+      integrations: 
+        traefik:
+          enabled: false
