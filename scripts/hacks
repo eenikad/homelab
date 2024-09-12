@@ -176,7 +176,7 @@ def setup_kanidm_oauth_app(name: str, redirect_uri: str) -> None:
     print(redirect_uri)
     try:
         subprocess.run(
-            ["kanidm", "system", "oauth2", "create", "--url", f"https://{kanidm_host}", "--name", "admin", name, name, redirect_uri],
+            ["kanidm", "system", "oauth2", "create", "--url", f"https://{kanidm_host}", "--name", "idm_admin", name, name, redirect_uri],
             capture_output=True,
             check=True,
         )
@@ -185,30 +185,22 @@ def setup_kanidm_oauth_app(name: str, redirect_uri: str) -> None:
         return
 
     # TODO https://github.com/dexidp/dex/pull/3188
-    try:
-        subprocess.run(
-            ["kanidm", "system", "oauth2", "warning-insecure-client-disable-pkce", "--url", f"https://{kanidm_host}", "--name", "admin", name],
-            capture_output=True,
-            check=True,
-        )
-    except subprocess.CalledProcessError:
-        print("Error reached 2")
-        return
+    subprocess.run(
+        ["kanidm", "system", "oauth2", "warning-insecure-client-disable-pkce", "--url", f"https://{kanidm_host}", "--name", "idm_admin", name],
+        capture_output=True,
+        check=True,
+    )
 
-    try:
-        subprocess.run(
-            # TODO better group management
-            ["kanidm", "system", "oauth2", "create-scope-map", "--url", f"https://{kanidm_host}", "--name", "admin", name, "editor", "openid", "profile", "email", "groups"],
-            capture_output=True,
-            check=True,
-        )
-    except subprocess.CalledProcessError:
-        print("Error reached 3")
-        return
+    subprocess.run(
+        # TODO better group management
+        ["kanidm", "system", "oauth2", "create-scope-map", "--url", f"https://{kanidm_host}", "--name", "idm_admin", name, "editor", "openid", "profile", "email", "groups"],
+        capture_output=True,
+        check=True,
+    )
 
     print("Getting client secret for "+ name)
     client_secret = json.loads(subprocess.run(
-        ["kanidm", "system", "oauth2", "show-basic-secret", "--url", f"https://{kanidm_host}", "--name", "admin", "--output", "json", name],
+        ["kanidm", "system", "oauth2", "show-basic-secret", "--url", f"https://{kanidm_host}", "--name", "idm_admin", "--output", "json", name],
         capture_output=True,
         check=True,
     ).stdout.decode("utf-8"))
