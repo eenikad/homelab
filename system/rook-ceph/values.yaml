@@ -641,7 +641,7 @@ rook-ceph:
 rook-ceph-cluster:
   # -- Pod annotations
   annotations: 
-    k8s.v1.cni.cncf.io/networks: multus-iot
+    k8s.v1.cni.cncf.io/networks: default/multus-iot
   monitoring:
     enabled: true
     createPrometheusRules: true
