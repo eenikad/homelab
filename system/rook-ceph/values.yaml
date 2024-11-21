@@ -639,6 +639,8 @@ rook-ceph:
     # Enabling will also create RBAC rules to allow Operator to create ServiceMonitors
     enabled: true
 rook-ceph-cluster:
+  # -- Pod annotations
+  annotations: {}
   monitoring:
     enabled: true
     createPrometheusRules: true
